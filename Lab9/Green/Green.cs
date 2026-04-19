@@ -4,7 +4,7 @@ namespace Lab9.Green
 {
     public abstract class Green
     {
-        protected string Input { get; private set; }
+        public string Input { get; private set; }
 
         protected Green(string input)
         {
