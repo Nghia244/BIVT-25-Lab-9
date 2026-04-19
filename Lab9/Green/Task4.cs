@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Lab9
 {
-    class Program
+    class Program2
     {
         static void Main(string[] args)
         {
@@ -11,10 +11,10 @@ namespace Lab9
 
             Mark m1 = new Mark("SV001", "S01", 8.5);
 
-            Console.WriteLine("--- Subject ìno ---");
+            Console.WriteLine("--- Subject info ---");
             sub1.DisplaySubject();
 
-            Console.WriteLine("\n--- Grade ìno ---");
+            Console.WriteLine("\n--- Grade info ---");
             m1.DisplayMark();
 
             Console.ReadLine();
