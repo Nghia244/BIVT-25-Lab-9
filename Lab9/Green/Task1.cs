@@ -1,30 +1,38 @@
-namespace Lab9.Green
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+namespace Green
 {
     public class Task1 : Green
     {
-        private string _output;
-        public string Output => _output;
+        public (char, double)[] Output { get; private set; }
 
-        public Task1(string text) : base(text)
+        public Task1(string input) : base(input)
         {
-            _output = string.Empty;
+            Output = Array.Empty<(char, double)>();
         }
 
         public override void Review()
         {
-            if (string.IsNullOrEmpty(Input))
-            {
-                _output = string.Empty;
-            }
-            else
-            {
-                _output = Input.ToUpper(); 
-            }
+            var letters = Input
+                .ToLower()
+                .Where(c => c >= 'а' && c <= 'я')
+                .ToArray();
+
+            int total = letters.Length;
+
+            Output = letters
+                .GroupBy(c => c)
+                .Select(g => (g.Key, (double)g.Count() / total))
+                .OrderBy(t => t.Key)
+                .ToArray();
         }
 
         public override string ToString()
         {
-            return _output?.ToString() ?? string.Empty;
+            return string.Join("\n", Output
+                .Select(t => $"{t.Item1}:{t.Item2:F4}"));
         }
     }
 }
