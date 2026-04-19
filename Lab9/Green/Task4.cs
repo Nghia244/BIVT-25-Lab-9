@@ -1,22 +1,43 @@
 using System;
 
-namespace Lab9.Green
+namespace Green
 {
-    public class Task4
+    public class Task4 : Green
     {
-        public static void Main(string[] args)
+        public string[] Output { get; private set; }
+
+        public Task4(string input) : base(input)
         {
-            Task2 sub1 = new Task2("S01", "Code C#", 3);
+            Output = Array.Empty<string>();
+        }
 
-            Task3 m1 = new Task3("SV001", "S01", 8.5);
+        public override void Review()
+        {
+            var arr = Input.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-            Console.WriteLine("--- Subject info ---");
-            sub1.DisplaySubject();
+            for (int i = 0; i < arr.Length; i++)
+                arr[i] = arr[i].Trim();
 
-            Console.WriteLine("\n--- Grade info ---");
-            m1.DisplayMark();
+            // Bubble sort (vì cấm dùng sort có sẵn)
+            for (int i = 0; i < arr.Length - 1; i++)
+            {
+                for (int j = 0; j < arr.Length - i - 1; j++)
+                {
+                    if (string.Compare(arr[j], arr[j + 1], StringComparison.Ordinal) > 0)
+                    {
+                        var temp = arr[j];
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = temp;
+                    }
+                }
+            }
 
-            Console.ReadLine();
+            Output = arr;
+        }
+
+        public override string ToString()
+        {
+            return string.Join("\n", Output);
         }
     }
 }
