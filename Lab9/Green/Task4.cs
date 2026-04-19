@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace Lab9.Green
 {
@@ -7,9 +6,9 @@ namespace Lab9.Green
     {
         static void Main(string[] args)
         {
-            Subject sub1 = new Subject("S01", "Code C#", 3);
+            Task2 sub1 = new Task2("S01", "Code C#", 3);
 
-            Mark m1 = new Mark("SV001", "S01", 8.5);
+            Task3 m1 = new Task3("SV001", "S01", 8.5);
 
             Console.WriteLine("--- Subject info ---");
             sub1.DisplaySubject();
