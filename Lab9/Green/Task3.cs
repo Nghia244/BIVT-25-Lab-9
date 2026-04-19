@@ -1,6 +1,6 @@
 using System;
 
-namespace Lab9
+namespace Lab9.Green
 {
     public class Mark
     {
