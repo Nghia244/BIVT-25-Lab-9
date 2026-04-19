@@ -1,25 +1,38 @@
 using System;
+using System.Linq;
+using System.Collections.Generic;
 
-namespace Lab9.Green
+namespace Green
 {
-    public class Task2
+    public class Task2 : Green
     {
-        public string SubjectId { get; set; } = "";
-        public string SubjectName { get; set; } = "";
-        public int Credit { get; set; }
+        public char[] Output { get; private set; }
 
-        public Task2() { }
-
-        public Task2(string id, string name, int credit)
+        public Task2(string input) : base(input)
         {
-            SubjectId = id;
-            SubjectName = name;
-            Credit = credit;
+            Output = Array.Empty<char>();
         }
 
-        public void DisplaySubject()
+        public override void Review()
         {
-            Console.WriteLine($"ID: {SubjectId} | Name: {SubjectName} | Credits: {Credit}");
+            var words = Input
+                .ToLower()
+                .Split(new char[] { ' ', ',', '.', '!', '?', ';', ':' }, StringSplitOptions.RemoveEmptyEntries);
+
+            var result = words
+                .Where(w => w.Length > 0 && w[0] >= 'а' && w[0] <= 'я')
+                .GroupBy(w => w[0])
+                .OrderByDescending(g => g.Count())
+                .ThenBy(g => g.Key)
+                .Select(g => g.Key)
+                .ToArray();
+
+            Output = result;
+        }
+
+        public override string ToString()
+        {
+            return string.Join(", ", Output);
         }
     }
 }
